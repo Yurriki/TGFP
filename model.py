@@ -69,12 +69,12 @@ class TGMFNet(nn.Module):
         self.loc_op = nn.Linear(self.decoder_size, 5)
 
         self.dest_enc_size = [8,16]
-        self.dest_latent_size = [8,50]
-        self.dest_dec_size = [512,256,512]
+        self.dest_latent_size = [8,64]
+        self.dest_dec_size = [256,128,256]
 
         self.fdim = 16
         self.zdim = 16
-        self.sigma = 1.3
+        self.sigma = 1
         self.dest_enc = MLP(input_dim = 2, output_dim = self.fdim, hidden_size=self.dest_enc_size)
         self.latent_enc = MLP(input_dim = self.fdim + self.dynamics_encoding_size + self.soc_embedding_size, output_dim = 2*self.zdim, hidden_size=self.dest_latent_size)
         self.dest_dec = MLP(input_dim = self.dynamics_encoding_size + self.soc_embedding_size + self.zdim, output_dim = 2, hidden_size=self.dest_dec_size)
